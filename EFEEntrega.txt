@@ -1,0 +1,116 @@
+Comentar que pude reutilizar parte del código que nos mostró, logrando realizar un formulario de INSERT para ingresar datos en la BD, tengo un botón QUERY por nombre del juego, un botón QUERY para refrescar la vista a la base de datos actualizar la tabla, y por último el botón UPDATE para actualizar datos, que si bien funciona necesita tener algunas precauciones, se debe seleccionar el campo a actualizar y una vez cambiado el valor del campo se debe deseleccionar pero mantener seleccionada la línea que se quiere actualizar, si no deseleccionamos el campo o nos cambiamos de línea no se guarda el valor en la BD, de lo contrario debemos realizar una búsqueda por el nombre del juego y realizar los cambios y luego actualizar los datos , la conexión a la BD y los QUERY para buscar insertar son los siguientes:
+
+
+Mi base de datos se llama EFE y las tablas "COLABORADORES" y "JUEGOS" son las siguiente:
+
+CREATE TABLE COLABORADORES (IDCOLABORADORES INTEGER NOT NULL, NOMCOLABORADORES CHAR(10), PRIMARY KEY (IDCOLABORADORES));
+
+INSERT INTO EFE.COLABORADORES (IDCOLABORADORES, NOMCOLABORADORES) 
+	VALUES (1, 'Editor    ');
+INSERT INTO EFE.COLABORADORES (IDCOLABORADORES, NOMCOLABORADORES) 
+	VALUES (2, 'Disenador ');
+INSERT INTO EFE.COLABORADORES (IDCOLABORADORES, NOMCOLABORADORES) 
+	VALUES (3, 'Artista   ');
+
+CREATE TABLE JUEGOS (IDJUEGOS INTEGER NOT NULL, NOMBREJUEGO CHAR(20), PRECIOJUEGO INTEGER, DESCRIPCIONJUEGO CHAR(100), JUGADORESJUEGO INTEGER, TIEMPOJUEGO INTEGER, EDADJUEGO INTEGER, IDIOMAJUEGO CHAR(20), STOCKJUEGO INTEGER, IDCOLABORADORES INTEGER, PRIMARY KEY (IDJUEGOS));
+
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (1, 'ajedrez             ', 15500, 'Juego de mesa                                                                                       ', 2, 200, 0, 'Español             ', 10, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (2, 'Damas               ', 5700, 'Juego de mesa                                                                                       ', 2, 100, 0, 'Espñol              ', 25, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (3, '22300               ', 22300, '2                                                                                                   ', 2, 200, 10, '40                  ', 40, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (4, 'Monopolis           ', 25000, 'Juego de compra venta de propiedades                                                                ', 4, 200, 15, 'Multiple            ', 15, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (5, 'Dobble              ', 36000, 'Encontrar el dibujo identico                                                                        ', 8, 10, 5, 'Español             ', 5, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (6, 'Virus               ', 13400, 'No podrás jugar solo una partida y querrás llevarlo a todas partes contigo.                         ', 6, 20, 8, 'Español             ', 12, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (7, 'Dixit               ', 23560, 'Dixit es un juego de mesa para todos los públicos.                                                  ', 6, 30, 8, 'Multiple            ', 8, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (8, 'Mysterium           ', 32100, 'Sentaos alrededor de la mesa, abrid vuestra mente y despertad vuestro sexto sentido                 ', 7, 45, 10, 'Ingles              ', 4, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (9, 'El Espia            ', 35600, 'El Espía que se perdió es un divertidísimo party game                                               ', 8, 15, 10, 'Español             ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (10, 'The Island          ', 32900, 'The Island es un juego de mesa, donde dirigirás a un grupo de exploradores                          ', 4, 45, 8, 'Ingles              ', 6, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (11, 'Room 25             ', 21340, 'Room 25 es un complejo lleno de habitaciones                                                        ', 6, 30, 10, 'Multiple            ', 7, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (12, 'Santiago de Cuba    ', 34600, 'es un juego de tablero, muy entretenido, de gestión de recursos y estrategia                        ', 4, 50, 10, 'Español             ', 4, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (13, 'Juego de Tronos     ', 29500, 'Álzate con la victoria y obtén el Trono de Hierro                                                   ', 4, 240, 14, 'Multiple            ', 5, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (14, 'Agricola            ', 27400, 'empieza el juego con una cabaña y dos familiares, y prospera                                        ', 4, 120, 10, 'Ingles              ', 9, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (15, 'Bang                ', 45300, 'Bang! es un juego de cartas en el que nadie será tu amigo.                                          ', 7, 40, 8, 'Español             ', 4, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (16, 'Patchwork           ', 29800, 'El juego Patchwork es un juego de puzzles y estrategia                                              ', 2, 30, 8, 'Multiple            ', 6, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (17, 'Pandemic            ', 31900, 'Pandemic es posiblemente el juego de mesa cooperativo                                               ', 4, 45, 8, 'Ingles              ', 3, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (18, '7 Wonders           ', 29700, 'Lleva a tu pueblo a los más alto convirtiendote en el mejor constructor.                            ', 4, 45, 10, 'Español             ', 5, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (19, 'Blokus              ', 35500, 'Un juego de mesa sencillo que pone a prueba tu agilidad mental y tus tácticas como estratega        ', 4, 30, 7, 'Multiple            ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (20, 'Carcassonne         ', 31700, 'Una de las mejores opciones para iniciarse en los juegos de mesa de estrategia,                     ', 6, 35, 10, 'Multiple            ', 4, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (21, 'Skyjo               ', 29500, 'Un juego de cartas familiar que pone en jaque las habilidades aritméticas                           ', 8, 30, 8, 'Español             ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (22, 'Paleo               ', 39300, 'Una aventura en la Edad de Piedra                                                                   ', 4, 90, 10, 'Ingles              ', 2, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (23, 'Little Secret       ', 21700, 'Un juego de roles ocultos donde nada es lo que parece                                               ', 9, 20, 10, 'Español             ', 1, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (24, 'MICRO MACRO         ', 33200, 'Una ciudad llamada Crime City                                                                       ', 4, 45, 12, 'Español             ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (25, 'The Mind            ', 37900, 'Un juego de mesa rápido, original y fácil de jugar                                                  ', 4, 20, 8, 'Ingles              ', 2, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (26, 'La Tripulación      ', 21900, 'Partidas rápidas en torno a un trepidante viaje interestelar                                        ', 5, 35, 10, 'Español             ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (27, 'Santorini           ', 19800, 'Construye la ciudad de Santorini desde los cimientos y de un modo muy visual                        ', 3, 20, 8, 'Español             ', 4, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (28, 'Jaipur              ', 23500, 'juego para dos donde debéis competir por convertiros en el mejor mercader del Maharajá              ', 2, 30, 10, 'Español             ', 3, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (29, 'El laberinto mágico ', 32000, 'Un juego mágico muy entretenido y fácil para los niños                                              ', 4, 30, 6, 'Español             ', 5, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (30, 'Jenga               ', 36800, 'Evita que se derrumbe la torre!                                                                     ', 6, 20, 6, 'Ingles              ', 1, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (31, '¡Pillado!           ', 27800, 'Un juego de mesa educativo y cooperativo para niños                                                 ', 4, 30, 5, 'Multiple            ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (32, 'Party & Co          ', 39200, 'juego de mesa por equipos con cientos de preguntas y pruebas                                        ', 2, 50, 12, 'Multiple            ', 2, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (33, 'Just One            ', 19300, 'Un juego familiar de mesa de apariencia sencilla                                                    ', 7, 20, 8, 'Ingles              ', 4, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (34, 'Guatafac            ', 24600, 'Alegra tus fiestas con este juego de cartas de preguntas random y mucho humor                       ', 15, 30, 18, 'Español             ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (35, 'Código Secreto      ', 32400, 'Un juego de cartas de dinámica sencilla y original                                                  ', 8, 15, 14, 'Español             ', 4, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (36, 'Juego de tronos     ', 28600, 'Una lucha por el poder para sentarte en el trono de hierro                                          ', 6, 120, 14, 'Español             ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (37, 'Puerto Rico         ', 31200, 'Haz que prospere tu ciudad con una buena gestión de los recursos                                    ', 5, 120, 12, 'Multiple            ', 4, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (38, 'Risk                ', 27400, 'n juego para los amantes de las batallas épicas                                                     ', 5, 120, 10, 'Español             ', 5, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (39, 'Aventureros al Tren ', 33700, 'Aventureros al Tren es uno de esos juegos que gusta a todo el mundo                                 ', 5, 60, 8, 'Español             ', 2, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (40, 'La Isla Prohibida   ', 25900, 'Uno de los mejores juegos cooperativos del año                                                      ', 4, 30, 10, 'Multiple            ', 3, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (41, 'La Polilla Tramposa ', 31900, 'aquí gana la polilla más tramposa                                                                   ', 7, 20, 4, 'Español             ', 2, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (42, 'Jungle Speed        ', 29800, 'juego muy divertido que requiere agilidad mental y mucha rapidez                                    ', 10, 15, 7, 'Multiple            ', 1, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (43, 'Colt Express        ', 37900, 'serás un bandido que sube a un tren para asaltarlo                                                  ', 6, 45, 10, 'Ingles              ', 5, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (44, 'Munchkin            ', 23400, 'Un juego de cartas para iniciarse en los juegos de rol                                              ', 7, 60, 14, 'Multiple            ', 1, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (45, 'The Island          ', 31900, 'Uno de los juegos más divertidos del momento,                                                       ', 4, 45, 10, 'Español             ', 1, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (46, 'Villainous          ', 27800, 'vas a ser uno de los 6 malvados de los cuentos                                                      ', 6, 60, 10, 'Ingles              ', 2, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (47, '¡Pictureka!         ', 27000, 'Pon a prueba a toda la familia                                                                      ', 9, 20, 6, 'Multiple            ', 1, 2);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (48, 'Azul                ', 38400, 'Azul es un juego de mesa espectacularmente vistoso y muy colorido                                   ', 4, 20, 8, 'Español             ', 2, 3);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (49, 'Beat That!          ', 29700, '¡Apuesta y gana!                                                                                    ', 8, 40, 7, 'Multiple            ', 3, 1);
+INSERT INTO EFE.JUEGOS (IDJUEGOS, NOMBREJUEGO, PRECIOJUEGO, DESCRIPCIONJUEGO, JUGADORESJUEGO, TIEMPOJUEGO, EDADJUEGO, IDIOMAJUEGO, STOCKJUEGO, IDCOLABORADORES) 
+	VALUES (50, 'Exploding Kittens   ', 26400, 'Un juego de cartas de estrategia                                                                    ', 5, 15, 7, 'Español             ', 2, 3);
